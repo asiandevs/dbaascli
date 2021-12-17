@@ -1,0 +1,270 @@
+$  dbaascli pdb --help
+
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb --help
+    pdb localClone - clone a PDB from another PDB in the same database. 
+    pdb connectString - get connectString of the specified PDB. 
+    pdb remoteClone - clone the specified PDB from an another database. 
+    pdb close - close a PDB. 
+    pdb create - create a new PDB. 
+    pdb open - open a PDB. 
+    pdb delete - delete a PDB. 
+    pdb bounce - Bounce the PDB. 
+    pdb getDetails - get the details of provided PDB in the database. 
+    pdb list - get information of PDBs in a db. 
+    pdb backup - Performs PDB backup operations. 
+    pdb recover - Performs PDB recovery. 
+
+$ dbaascli pdb create --pdbname mmpdb1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb create --pdbname mmpdb1
+Job id: b5153fca-0d0a-4c61-bc7a-8710a084d0d9
+Loading PILOT...
+Session ID of the current execution is: 1
+Log file location: /var/opt/oracle/log/eaymp/pdb/create/pilot_2021-12-17_01-16-18-PM
+-----------------
+Running Plugin_initialization job
+Completed Plugin_initialization job
+-----------------
+Running Validate_input_params job
+Completed Validate_input_params job
+-----------------
+Running Perform_dbca_prechecks job
+Completed Perform_dbca_prechecks job
+-----------------
+Running PDB_creation job
+Completed PDB_creation job
+-----------------
+Running Load_pdb_details job
+Completed Load_pdb_details job
+-----------------
+Running Configure_pdb_service job
+Completed Configure_pdb_service job
+-----------------
+Running Configure_tnsnames_ora job
+Completed Configure_tnsnames_ora job
+-----------------
+Running Set_pdb_admin_user_profile job
+Completed Set_pdb_admin_user_profile job
+-----------------
+Running Lock_pdb_admin_user job
+Completed Lock_pdb_admin_user job
+-----------------
+Running Generate_dbsystem_details job
+Completed Generate_dbsystem_details job
+dbaascli execution completed
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb list --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb info --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb info --pdbname MMPDB1
+Executing: pdb info
+INFO : pdb info operation success
+$VAR1 = {
+          'pdbKmsKeyOcid' => '',
+          'dbname' => 'eaymp',
+          'cpu_count' => undef,
+          'pdbname' => 'MMPDB1',
+          'dbid' => '1112114196',
+          'storage_allocated' => 'UNLIMITED',
+          'storage_used' => '4.34G',
+          'creation_time' => '2021-12-17T13:17:30',
+          'guid' => 'D34F2418FD6B3B62E0530300CC0AED72'
+        };
+
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb connect_string --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb connect_string --pdbname MMPDB1
+Job id: 5c3c7fba-4455-4869-97a2-48f6028dcdb4
+[ {
+  "serviceName" : "eaymp_MMPDB1.paas.oracle.com",
+  "connectString" : "pmjksexa-asxyq-scan.exacsclient.pmjksmelvcn.oraclevcn.com:1521/eaymp_MMPDB1.paas.oracle.com"
+} ]
+dbaascli execution completed
+
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb connect_info --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb connect_info --pdbname MMPDB1
+Executing: pdb connect_info
+INFO : pdb connect_info operation success
+/var/opt/oracle/dbaas_acfs/connect_info/eaymp/wallet_MMPDB1.zip
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb checkpdb --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb checkpdb --pdbname MMPDB1
+Executing: pdb checkpdb
+INFO : pdb checkpdb operation success
+$VAR1 = [
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq1',
+            'INSTANCE_NAME' => 'eaymp1'
+          },
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq2',
+            'INSTANCE_NAME' => 'eaymp2'
+          }
+        ];
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb close --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb close --pdbname MMPDB1
+Job id: 80822f61-0fa9-403d-8685-41afdf4e9ff1
+dbaascli execution completed
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb checkpdb --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb checkpdb --pdbname MMPDB1
+Executing: pdb checkpdb
+INFO : pdb checkpdb operation success
+$VAR1 = [
+          {
+            'OPEN MODE' => 'MOUNTED',
+            'RESTRICTED' => undef,
+            'HOSTNAME' => 'pmjksexa-asxyq1',
+            'INSTANCE_NAME' => 'eaymp1'
+          },
+          {
+            'OPEN MODE' => 'MOUNTED',
+            'RESTRICTED' => undef,
+            'HOSTNAME' => 'pmjksexa-asxyq2',
+            'INSTANCE_NAME' => 'eaymp2'
+          }
+        ];
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb open --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb open --pdbname MMPDB1
+Job id: 8de990f4-280a-4690-bdc7-8f9ccdd26256
+dbaascli execution completed
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb checkpdb --pdbname MMPDB1 --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb checkpdb --pdbname MMPDB1
+Executing: pdb checkpdb
+INFO : pdb checkpdb operation success
+$VAR1 = [
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq2',
+            'INSTANCE_NAME' => 'eaymp2'
+          },
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq1',
+            'INSTANCE_NAME' => 'eaymp1'
+          }
+        ];
+
+
+$ dbaascli pdb rename --pdbname MMPDB1 --newname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb rename --pdbname MMPDB1 --newname MMKACHU
+Executing: pdb rename
+INFO : pdb MMKACHU will 'open' across all instances 
+INFO : pdb rename operation success
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb checkpdb --pdbname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb checkpdb --pdbname MMKACHU
+Executing: pdb checkpdb
+INFO : pdb checkpdb operation success
+$VAR1 = [
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq1',
+            'INSTANCE_NAME' => 'eaymp1'
+          },
+          {
+            'OPEN MODE' => 'READ WRITE',
+            'RESTRICTED' => 'NO',
+            'HOSTNAME' => 'pmjksexa-asxyq2',
+            'INSTANCE_NAME' => 'eaymp2'
+          }
+        ];
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb info --pdbname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb info --pdbname MMKACHU
+Executing: pdb info
+INFO : pdb info operation success
+$VAR1 = {
+          'pdbKmsKeyOcid' => '',
+          'dbname' => 'eaymp',
+          'cpu_count' => undef,
+          'pdbname' => 'MMKACHU',
+          'dbid' => '1112114196',
+          'storage_allocated' => 'UNLIMITED',
+          'storage_used' => '4.34G',
+          'creation_time' => '2021-12-17T13:17:30',
+          'guid' => 'D34F2418FD6B3B62E0530300CC0AED72'
+        };
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb resize --pdbname MMKACHU --dbname eaymp --maxsize 200M --maxcpu 1
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb resize --pdbname MMKACHU --maxsize 200M --maxcpu 1
+Executing: pdb resize
+INFO : exacs_pdb.pm : _is_valid_cpu : Max cpu cores in OS is 6
+INFO : Incoming value of 200M is too low. Defaulting size to 50G   
+INFO : pdb resize operation success
+
+[oracle@pmjksexa-asxyq1 ~]$ dbaascli pdb info --pdbname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb info --pdbname MMKACHU
+Executing: pdb info
+INFO : pdb info operation success
+$VAR1 = {
+          'pdbKmsKeyOcid' => '',
+          'dbname' => 'eaymp',
+          'cpu_count' => '1',
+          'pdbname' => 'MMKACHU',
+          'dbid' => '1112114196',
+          'storage_allocated' => '50.00G',
+          'storage_used' => '4.34G',
+          'creation_time' => '2021-12-17T13:17:30',
+          'guid' => 'D34F2418FD6B3B62E0530300CC0AED72'
+        };
+
+
+dbaascli pdb delete --pdbname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb delete --pdbname MMKACHU
+Job id: b3cbccb6-53d2-458e-9fcd-966957a61503
+Loading PILOT...
+Session ID of the current execution is: 2
+Log file location: /var/opt/oracle/log/eaymp/pdb/delete/pilot_2021-12-17_02-56-40-PM
+-----------------
+Running Plugin_initialization job
+Completed Plugin_initialization job
+-----------------
+Running Perform_dbca_prechecks job
+Completed Perform_dbca_prechecks job
+-----------------
+Running Delete_pdb_service job
+Completed Delete_pdb_service job
+-----------------
+Running PDB_deletion job
+Completed PDB_deletion job
+-----------------
+Running Delete_tnsnames_entry job
+Completed Delete_tnsnames_entry job
+-----------------
+Running Generate_dbsystem_details job
+Completed Generate_dbsystem_details job
+dbaascli execution completed
+
+$ dbaascli pdb info --pdbname MMKACHU --dbname eaymp
+DBAAS CLI version 21.4.1.0.1
+Executing command pdb info --pdbname MMKACHU
+Executing: pdb info
+INFO : pdb info operation success
+$VAR1 = undef;
