@@ -1,0 +1,127 @@
+Sample dbaascli command during/after patching
+
+=========================
+GRID INFRASTRUCTURE 
+=========================
+
+Current Patch Tools  
+--------------------
+[root@zx0201vm03 opc]# dbaascli patch tools list
+DBAAS CLI version 19.1.1.1.0
+Executing command patch tools list
+
+Checking tools on all nodes
+Current Patchid on zx0201vm03: 19.1.1.1.0_210521.0729
+
+Available Patches
+Patchid : 19.1.1.1.0_210725.0324(LATEST)
+
+Install tools patch using
+dbaascli patch tools apply --patchid 19.1.1.1.0_210725.0324    or
+dbaascli patch tools apply --patchid LATEST
+
+All Nodes have the same tools version
+
+All Nodes have the same tools version
+
+All Nodes have the same tools version
+
+All Nodes have the same tools version
+Upgrade Exadata patch tools
+
+
+Update Patch Tools  
+------------------
+[root@zx0201vm03 opc]# dbaascli patch tools apply --patchid LATEST
+DBAAS CLI version 19.1.1.1.0
+Executing command patch tools apply --patchid LATEST
+Current tools version on zx0202vm03: 19.1.1.1.0_210521.0729
+Patchid to apply  LATEST
+Updated dbaastools rpm to dbaastools_exa-1.0-1+19.1.1.1.0_210725.0324.x86_64
+Current tools version on zx0203vm03: 19.1.1.1.0_210521.0729
+Patchid to apply  LATEST
+Updated dbaastools rpm to dbaastools_exa-1.0-1+19.1.1.1.0_210725.0324.x86_64
+Current tools version on zx0204vm03: 19.1.1.1.0_210521.0729
+Patchid to apply  LATEST
+Updated dbaastools rpm to dbaastools_exa-1.0-1+19.1.1.1.0_210725.0324.x86_64
+
+Check Exadata tools version after upgrade
+------------------------------------------
+Verify Patch tools  
+[root@zx0201vm03 opc]# dbaascli patch tools list
+DBAAS CLI version 19.1.1.1.0
+Executing command patch tools list
+
+
+Checking tools on all nodes
+Current Patchid on zx0201vm03: 19.1.1.1.0_210725.0324
+No applicable tools patches are available
+
+All Nodes have the same tools version
+
+All Nodes have the same tools version
+
+All Nodes have the same tools version
+
+
+===================
+ORACLE HOME
+===================
+[root@zx0101vm02 ~]# dbaascli dbhome info
+
+
+DBAAS CLI version 19.1.1.1.0
+Executing command dbhome info
+Enter a homename or just press enter if you want details of all homes
+
+1.HOME_NAME=OraHome100_191000_dbru210119_0
+  HOME_LOC=/u02/app/oracle/product/19.0.0.0/dbhome_2
+  PATCH_LEVEL=191000_dbru210119
+  DBs installed= 
+  OH Backup = NOT Configured
+  
+1.HOME_NAME=OraHome100_19000_dbbp210720_0
+  HOME_LOC=/u02/app/oracle/product/19.0.0.0/dbhome_2
+  PATCH_LEVEL=191200_dbru210720
+  DBs installed= 
+  OH Backup = NOT Configured
+  
+
+2.HOME_NAME=agent13c2
+  HOME_LOC=/u02/app/oracle/agent13.4/agent_13.4.0.0.0
+  PATCH_LEVEL=No_0
+  DBs installed=
+  OH Backup = NOT Configured
+
+3.HOME_NAME=ORA12c_12102_dbbp190115_0_12102_dbbp210119_0
+  HOME_LOC=/u02/app/oracle/product/12.1.0/dbhome_3
+  PATCH_LEVEL=12102_dbbp210119
+  DBs installed=
+  OH Backup = NOT Configured
+
+
+Before Patching
+-----------------
+[root@zx0101vm02 ~]# dbaascli dbhome info
+
+DBAAS CLI version 19.1.1.1.0
+Executing command dbhome info
+Enter a homename or just press enter if you want details of all homes
+1.HOME_NAME=OraHome100_191000_dbru210119_0
+HOME_LOC=/u02/app/oracle/product/19.0.0.0/dbhome_2
+PATCH_LEVEL=191000_dbru210119
+DBs installed= 
+OH Backup = NOT Configured
+
+After Patching:
+-----------------
+[qu0991zx-001][oracle@zx0101vm02 admin]$ sudo dbaascli dbhome info
+DBAAS CLI version 19.1.1.1.0
+Executing command dbhome info
+Enter a homename or just press enter if you want details of all homes
+1.HOME_NAME=OraHome100_19000_dbbp210720_0
+HOME_LOC=/u02/app/oracle/product/19.0.0.0/dbhome_2
+PATCH_LEVEL=191200_dbru210720
+DBs installed= 
+OH Backup = NOT Configured
+
